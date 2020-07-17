@@ -1,0 +1,16 @@
+{
+  "name": "telegram_epicgames_alerts",
+  "version": "1.0.0",
+  "description": "FREE GAMES",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js debug"
+  },
+  "author": "eliapolloniato",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "telegraf": "^3.38.0"
+  }
+}
