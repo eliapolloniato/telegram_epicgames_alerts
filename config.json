@@ -1,0 +1,10 @@
+{
+    "endpoints": {
+        "FREE_GAMES": "https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?country={{country}}&allowCountries={{allowCountries}}&locale={{locale}}",
+        "CATALOG_BUNDLES": "https://store-content.ak.epicgames.com/api/{{locale}}/content/bundles/{{slug}}",
+        "CATALOG_PRODUCTS": "https://store-content.ak.epicgames.com/api/{{locale}}/content/products/{{slug}}"
+    },
+    "country": "IT",
+    "allowCountries": "IT",
+    "locale": "it-IT"
+}
