@@ -1,4 +1,5 @@
 const axios = require('axios')
+const moment = require('moment')
 
 function parsePrice(data) {
     let price = {
@@ -37,7 +38,8 @@ function parseFreeGames(input) {
                 image: element.keyImages[0].url,
                 publisher: element.customAttributes[1].value,
                 price: parsePrice(element.price),
-                endDate: new Date(element.promotions.promotionalOffers[0].promotionalOffers[0].endDate)
+                startDate: moment(element.promotions.promotionalOffers[0].promotionalOffers[0].startDate).locale('it'),
+                endDate: moment(element.promotions.promotionalOffers[0].promotionalOffers[0].endDate).locale('it')
             }
             list.push(game)
         }
