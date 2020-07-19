@@ -1,9 +1,9 @@
 {
-  "chatIds": [
-    {
-      "id": 1,
-      "chatId": 523591653
-    }
-  ],
-  "count": 1
+    "chatIds": [{
+        "id": 1,
+        "chatId": 523591653,
+        "type": "private",
+        "name": "elia05"
+    }],
+    "count": 1
 }

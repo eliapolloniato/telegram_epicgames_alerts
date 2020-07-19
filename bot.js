@@ -6,24 +6,26 @@ const FileSync = require('lowdb/adapters/FileSync')
 const adapter = new FileSync('db.json')
 const db = low(adapter)
 
-function addToDB(chatId) {
+function updateDB(chatId, username, type, groupTitle) {
     return new Promise((resolve, reject) => {
         if (!db.get('chatIds').find({ chatId: chatId }).value()) {
             console.log('nuovo utente')
             let count = db.get('count').value()
             db.get('chatIds')
-                .push({ id: count + 1, chatId: chatId })
+                .push({ id: count + 1, chatId: chatId, type: type, name: username ? username : groupTitle })
                 .write()
             db.update('count', n => n + 1)
                 .write()
-            resolve("L'utente è stato aggiunto con successo al database")
+            let message = 'Notifiche attivate in quest{{type}}'
+            resolve(message.replace('{{type}}', type === 'group' ? 'o gruppo' : 'a chat'))
         } else {
             db.get('chatIds')
                 .remove({ chatId: chatId })
                 .write()
             db.update('count', n => n - 1)
                 .write()
-            reject("L'utente è già esistente nel database, lo sto rimuovendo")
+            let message = 'Notifiche disattivate in quest{{type}}'
+            reject(message.replace('{{type}}', type === 'group' ? 'o gruppo' : 'a chat'))
         }
     })
 }
@@ -32,8 +34,9 @@ function botCreate(token) {
     return new Promise((resolve, reject) => {
         try {
             const bot = new Telegraf(token)
-            bot.start((ctx) => {
-                addToDB(ctx.chat.id).catch((err) => {
+            bot.start((ctx) => ctx.reply('ciao'))
+            bot.command('notifica', (ctx) => {
+                updateDB(ctx.chat.id, ctx.chat.username, ctx.chat.type, ctx.chat.title).catch((err) => {
                     ctx.reply(err)
                 }).then((result) => {
                     if (result) {
@@ -41,7 +44,7 @@ function botCreate(token) {
                     }
                 })
             })
-            bot.help((ctx) => ctx.reply('Send me a sticker'))
+            bot.help((ctx) => ctx.reply('aiuto'))
             bot.launch()
             resolve(bot)
         } catch (error) {
