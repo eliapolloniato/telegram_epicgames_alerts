@@ -17,7 +17,10 @@ function loop(app) {
         fetch.getFreeGames(config.endpoints.FREE_GAMES, config.country, config.allowCountries, config.locale).then((result) => {
             fetch.parseFreeGames(result).then((games) => {
                 if (!_.isEqual(oldGames, games)) {
-                    bot.botSend(app, { games: games })
+                    bot.botSend(app, { games: games }).catch((err) => {
+                        console.error(err)
+                        games = {}
+                    })
                     console.log('nuovo gioco')
                     oldGames = games
                 } else {

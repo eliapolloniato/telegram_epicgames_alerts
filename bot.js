@@ -34,7 +34,7 @@ function botCreate(token) {
     return new Promise((resolve, reject) => {
         try {
             const bot = new Telegraf(token)
-            bot.start((ctx) => ctx.reply('ciao'))
+            bot.start((ctx) => ctx.reply('Questo bot ti invierà una notificha ogni volta che un gioco diventerà gratuito nell\'Epic Games Store.'))
             bot.command('notifica', (ctx) => {
                 updateDB(ctx.chat.id, ctx.chat.username, ctx.chat.type, ctx.chat.title).catch((err) => {
                     ctx.reply(err)
@@ -44,7 +44,7 @@ function botCreate(token) {
                     }
                 })
             })
-            bot.help((ctx) => ctx.reply('aiuto'))
+            bot.help((ctx) => ctx.reply('Comandi:\n/notifica -> abilita le notifiche in questa chat'))
             bot.launch()
             resolve(bot)
         } catch (error) {
