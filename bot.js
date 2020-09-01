@@ -1,12 +1,7 @@
 const { Telegraf } = require('telegraf')
 const Extra = require('telegraf/extra')
-const low = require('lowdb')
-const FileSync = require('lowdb/adapters/FileSync')
 
-const adapter = new FileSync('./database/db.json')
-const db = low(adapter)
-
-function updateDB(chatId, username, type, groupTitle) {
+function updateDB(db, chatId, username, type, groupTitle) {
     return new Promise((resolve, reject) => {
         if (!db.get('chatIds').find({ chatId: chatId }).value()) {
             console.log('nuovo utente')
@@ -29,13 +24,13 @@ function updateDB(chatId, username, type, groupTitle) {
     })
 }
 
-function botCreate(token) {
+function botCreate(db, token) {
     return new Promise((resolve, reject) => {
         try {
             const bot = new Telegraf(token)
             bot.start((ctx) => ctx.reply('Questo bot ti invierà una notificha ogni volta che un gioco diventerà gratuito nell\'Epic Games Store.'))
             bot.command('notifica', (ctx) => {
-                updateDB(ctx.chat.id, ctx.chat.username, ctx.chat.type, ctx.chat.title).catch((err) => {
+                updateDB(db, ctx.chat.id, ctx.chat.username, ctx.chat.type, ctx.chat.title).catch((err) => {
                     ctx.reply(err)
                 }).then((result) => {
                     if (result) {
@@ -52,7 +47,7 @@ function botCreate(token) {
     })
 }
 
-function botSend(bot, data) {
+function botSend(db, bot, data) {
     return new Promise((resolve, reject) => {
         let userList = db.get('chatIds')
             .value()

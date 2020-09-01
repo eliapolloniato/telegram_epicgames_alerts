@@ -34,7 +34,7 @@ function loop(app) {
                             newGames.push(e)
                         }
                     }))
-                    bot.botSend(app, { games: newGames }).catch((err) => {
+                    bot.botSend(db, app, { games: newGames }).catch((err) => {
                         console.error(err)
                     })
                     db.set('games', newIds)
@@ -50,7 +50,7 @@ db.defaults({ chatIds: [], count: 0, games: [] })
     .write()
 
 
-bot.botCreate(process.env.BOT_TOKEN_2).catch((error) => {
+bot.botCreate(db, process.env.BOT_TOKEN_2).catch((error) => {
     console.error(error)
 }).then((app) => {
     loop(app)
