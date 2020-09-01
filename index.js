@@ -50,7 +50,7 @@ db.defaults({ chatIds: [], count: 0, games: [] })
     .write()
 
 
-bot.botCreate(process.env.BOT_TOKEN).catch((error) => {
+bot.botCreate(process.env.BOT_TOKEN_2).catch((error) => {
     console.error(error)
 }).then((app) => {
     loop(app)
