@@ -3,16 +3,15 @@ const Extra = require('telegraf/extra')
 const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
 
-const adapter = new FileSync('db.json')
+const adapter = new FileSync('./database/db.json')
 const db = low(adapter)
 
 function updateDB(chatId, username, type, groupTitle) {
     return new Promise((resolve, reject) => {
         if (!db.get('chatIds').find({ chatId: chatId }).value()) {
             console.log('nuovo utente')
-            let count = db.get('count').value()
             db.get('chatIds')
-                .push({ id: count + 1, chatId: chatId, type: type, name: username ? username : groupTitle })
+                .push({ chatId: chatId, type: type, name: username ? username : groupTitle })
                 .write()
             db.update('count', n => n + 1)
                 .write()

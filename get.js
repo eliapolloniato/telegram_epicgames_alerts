@@ -30,10 +30,12 @@ function getFreeGames(Free_endpoint, country = "IT", allowCountries = "IT", loca
 function parseFreeGames(input) {
     return new Promise((resolve, reject) => {
         let list = []
+        if (input.length < 1) reject({ error: 'Input non valido' })
         for (let i = 0; i < input.length; i++) {
             let element = input[i]
             let game = {
                 title: element.title,
+                id: element.id,
                 description: element.description,
                 image: element.keyImages[0].url,
                 publisher: element.customAttributes[1].value,

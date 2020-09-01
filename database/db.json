@@ -1,11 +1,14 @@
 {
   "chatIds": [
     {
-      "id": 1,
       "chatId": 523591653,
       "type": "private",
       "name": "elia05"
     }
   ],
-  "count": 1
+  "count": 1,
+  "games": [
+    "c5cb60ecc6554c6a8d9a682b87ab04bb",
+    "e8efad3d47a14284867fef2c347c321d"
+  ]
 }
