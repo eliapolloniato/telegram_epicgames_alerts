@@ -4,7 +4,7 @@ const Extra = require('telegraf/extra')
 function updateDB(db, chatId, username, type, groupTitle) {
     return new Promise((resolve, reject) => {
         if (!db.get('chatIds').find({ chatId: chatId }).value()) {
-            console.log('nuovo utente')
+            console.log('nuovo utente:', username ? username : chatId)
             db.get('chatIds')
                 .push({ chatId: chatId, type: type, name: username ? username : groupTitle })
                 .write()

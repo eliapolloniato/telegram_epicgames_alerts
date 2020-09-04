@@ -116,3 +116,6 @@ dist
 
 # database
 database/db.json
+
+# test files
+test*

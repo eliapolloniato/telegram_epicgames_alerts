@@ -23,7 +23,7 @@ function getFreeGames(Free_endpoint, country = "IT", allowCountries = "IT", loca
                 offer.promotions.promotionalOffers.length > 0 &&
                 offer.promotions.promotionalOffers[0].promotionalOffers.find(p => p.discountSetting.discountPercentage === 0))
             resolve(free)
-        })
+        }).catch((err) => reject(err))
     })
 }
 

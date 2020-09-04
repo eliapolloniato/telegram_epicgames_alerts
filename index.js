@@ -16,6 +16,7 @@ var oldGames = {}
 
 function loop(app) {
     setTimeout(() => {
+
         fetch.getFreeGames(config.endpoints.FREE_GAMES, config.country, config.allowCountries, config.locale).then((result) => {
             fetch.parseFreeGames(result).then((games) => {
                 let newIds = []
@@ -35,14 +36,17 @@ function loop(app) {
                         }
                     }))
                     bot.botSend(db, app, { games: newGames }).catch((err) => {
-                        console.error(err)
-                    })
+                        throw new Error(err)
+                    }).then(() => console.log('nuovo gioco'))
                     db.set('games', newIds)
                         .write()
                 }
             })
+        }).catch((err) => {
+            console.log(err)
         })
-        loop()
+
+        loop(app)
     }, config.timeout * 1000)
 }
 
