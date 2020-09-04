@@ -1,19 +1,23 @@
 {
-  "name": "telegram_epicgames_alerts",
-  "version": "1.0.0",
-  "description": "FREE GAMES",
-  "main": "index.js",
-  "scripts": {
-    "test": "node index.js debug"
-  },
-  "author": "eliapolloniato",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^0.19.2",
-    "dotenv": "^8.2.0",
-    "lodash": "^4.17.19",
-    "lowdb": "^1.0.0",
-    "moment": "^2.27.0",
-    "telegraf": "^3.38.0"
-  }
+    "name": "telegram_epicgames_alerts",
+    "version": "1.0.0",
+    "description": "FREE GAMES",
+    "main": "index.js",
+    "scripts": {
+        "test": "node index.js debug"
+    },
+    "author": "eliapolloniato",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/eliapolloniato/telegram_epicgames_alerts.git"
+    },
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.19.2",
+        "dotenv": "^8.2.0",
+        "lodash": "^4.17.19",
+        "lowdb": "^1.0.0",
+        "moment": "^2.27.0",
+        "telegraf": "^3.38.0"
+    }
 }
