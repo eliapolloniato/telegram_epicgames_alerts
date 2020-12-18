@@ -33,12 +33,19 @@ function parseFreeGames(input) {
         if (input.length < 1) reject({ error: 'Input non valido' })
         for (let i = 0; i < input.length; i++) {
             let element = input[i]
+            let publisher = ""
+            element.customAttributes.forEach(({ key, value }) => {
+                if (key == "developerName") {
+                    publisher = value
+                }
+            });
             let game = {
                 title: element.title,
                 id: element.id,
                 description: element.description,
-                image: element.keyImages[0].url,
-                publisher: element.customAttributes[1].value,
+                /* image: element.keyImages[0].url, */
+                image: element.keyImages[element.keyImages.length - 1].url,
+                publisher: publisher,
                 price: parsePrice(element.price),
                 startDate: moment(element.promotions.promotionalOffers[0].promotionalOffers[0].startDate).locale('it'),
                 endDate: moment(element.promotions.promotionalOffers[0].promotionalOffers[0].endDate).locale('it')
