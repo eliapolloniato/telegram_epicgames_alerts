@@ -7,5 +7,5 @@
     "country": "IT",
     "allowCountries": "IT",
     "locale": "it-IT",
-    "timeout": 1
+    "timeout": 900
 }
